@@ -25,7 +25,6 @@ class Client:
 
 # functions
 
-
 # Takes a CSV row (or dict) and returns a Client object with stringified and whitespace-stripped properties
 def createClient(row):
     # Clean up the data
@@ -94,3 +93,5 @@ def addrMatch(ewayClient, lacerteClient):
 # Checks whether the preparers match
 def preparerMatch(ewayClient, lacerteClient):
     return ewayClient.preparer == lacerteClient.preparer
+
+# TODO: add status checking

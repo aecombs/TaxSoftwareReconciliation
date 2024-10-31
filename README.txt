@@ -27,6 +27,7 @@ Ex.:
 # Update the `eway_statuses` dict to list your firm's eWay statuses and the preferred corresponding Lacerte status that it should match.
 
 Ex.:
+
 > eway_statuses = {
 >   'Proforma\'d': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
 >   'Final': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
@@ -36,7 +37,6 @@ Ex.:
 >   'Planning': ['Financial Planning'],
 >   'Not Processed': ['Former', 'No Mail']
 > }
-
 
 # From Lacerte:
 - Group select the clients whose data you want
