@@ -28,7 +28,15 @@ Ex.:
 
 Ex.:
 
-
+> eway_statuses = {
+>   'Proforma\'d': [],
+>   'Final': [],
+>   'Amended': [],
+>   'Paper Return': [],
+>   'Next Year': [],
+>   'Planning': [],
+>   'Not Processed': []
+> }
 
 
 # From Lacerte:
