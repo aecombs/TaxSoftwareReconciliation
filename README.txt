@@ -27,8 +27,15 @@ Ex.:
 # Update the `eway_statuses` dict to list your firm's eWay statuses and the preferred corresponding Lacerte status that it should match.
 
 Ex.:
-
-
+> eway_statuses = {
+>   'Proforma\'d': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+>   'Final': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+>   'Amended': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+>   'Paper Return': ['Appt - In Person', 'No Appt', 'No Mail'],
+>   'Next Year': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail', 'Prospect'],
+>   'Planning': ['Financial Planning'],
+>   'Not Processed': ['Former', 'No Mail']
+> }
 
 
 # From Lacerte:
