@@ -40,7 +40,7 @@ def createClient(row):
     # map status if it's a digit; this will only trigger if it's converting Lacerte clients
     status = str(row['Status']).strip().upper()
     if status.isdigit():
-        status = lacerte_statuses[status]
+        status = data.lacerte_statuses[status]
 
     street = str(row['Street']).strip().upper()
     # apt = str(row['Apt']).strip().upper()  # can be empty
