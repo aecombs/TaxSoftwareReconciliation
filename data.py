@@ -1,4 +1,6 @@
-# Update this dict with your firm's preparers.
+
+# This is the file that holds important but conditional data.
+# Update the `preparers` dict with your firm's preparers.
 # Ex.:
 # preparers = {
 #   '0': 'Lorem Ipsum',
@@ -7,10 +9,12 @@
 #   '3': 'Adipiscing Elit'
 # }
 
+# ~~~~~~~~~~~~~~~~~ EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
+
 preparers = {
 }
 
-# ~~~~~~~~~~~~~~~~~ DO NOT EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~ EDIT ABOVE THIS LINE ~~~~~~~~~~~~~~~~~
 
 lacerte_statuses = {
     '1': 'Proforma\'d',
