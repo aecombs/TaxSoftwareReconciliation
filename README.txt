@@ -10,9 +10,12 @@ It checks agreement on three separate axes:
 ## How to Use
 
 To use this script, you'll need to replace the mock data in `eway_clients.csv` and `lacerte_clients.csv` with your actual client data.
-You'll also need update the `preparers.py` file that includes a python dict named `preparers`. This dict will need to list each preparer's representative number as the key with the corresponding name as it appears in eWay as the value.
 
-Here is an example:
+You'll also need update the `preparers.py` file. The required changes are as follows.
+
+# Update the `preparers` dict to list each preparer's representative number as the key with the corresponding name as it appears in eWay as the value
+
+Ex.:
 
 > preparers = {
 >   '0': 'Lorem Ipsum',
@@ -20,6 +23,13 @@ Here is an example:
 >   '2': 'Amet Consectetur',
 >   '3': 'Adipiscing Elit'
 > }
+
+# Update the `eway_statuses` dict to list your firm's eWay statuses and the preferred corresponding Lacerte status that it should match.
+
+Ex.:
+
+
+
 
 # From Lacerte:
 - Group select the clients whose data you want

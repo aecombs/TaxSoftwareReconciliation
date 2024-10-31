@@ -1,6 +1,10 @@
 
-# This is the file that holds important but conditional data.
+# This is the file that holds important but conditional data. Some of this will need to be edited to match your firm's specific requirements and setup.
+
+# ~~~~~~~~~~~~~~~~~ EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
+
 # Update the `preparers` dict with your firm's preparers.
+
 # Ex.:
 # preparers = {
 #   '0': 'Lorem Ipsum',
@@ -9,12 +13,34 @@
 #   '3': 'Adipiscing Elit'
 # }
 
-# ~~~~~~~~~~~~~~~~~ EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
+preparers = {}
 
-preparers = {
+# ~~~~~~~~~~~~~~~~~
+
+# Update the `eway_statuses` dict with your firm's eWay statuses and the desired corresponding Lacerte status.
+
+# Ex.:
+# eway_statuses = {
+    # 'Proforma\'d': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+    # 'Final': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+    # 'Amended': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail'],
+    # 'Paper Return': ['Appt - In Person', 'No Appt', 'No Mail'],
+    # 'Next Year': ['Appt - In Person', 'Appt - Virtual', 'No Appt', 'No Mail', 'Prospect'],
+    # 'Planning': ['Financial Planning'],
+    # 'Not Processed': ['Former', 'No Mail']
+# }
+
+eway_statuses = {
+    'Proforma\'d': [],
+    'Final': [],
+    'Amended': [],
+    'Paper Return': [],
+    'Next Year': [],
+    'Planning': [],
+    'Not Processed': []
 }
 
-# ~~~~~~~~~~~~~~~~~ EDIT ABOVE THIS LINE ~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~ DO NOT EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
 
 lacerte_statuses = {
     '1': 'Proforma\'d',
@@ -29,15 +55,3 @@ lacerte_statuses = {
     # 'Under Review',
     # 'On Extension',
 }
-
-# # all the possible statuses for a client; this is just for reference; yours will be different.
-# eway_statuses = [
-#     'Former',
-#     'Prospect',
-#     'Tax Client - Appt',
-#     'Tax Client - Appt (In-Person)',
-#     'Tax Client - Appt (Teams)',
-#     'Tax Client - No Appt',
-#     'Tax Client - Mail',
-#     'Tax Client - No Mail'
-# ]
