@@ -13,7 +13,20 @@
 #   '3': 'Adipiscing Elit'
 # }
 
-preparers = {}
+preparers = {
+    '0': '',
+    '1': 'Andy Andrikopoulos',
+    '2': 'Tim Chiochios',
+    '3': '',
+    '4': 'Kathryn Kauffman',
+    '5': '',
+    '6': 'Caitlin White',
+    '7': 'Jenny Wang',
+    '8': 'Kathy McGinnis',
+    '9': '',
+    '11': 'Dennis Daly',
+    '12': 'Merry C Davis'
+}
 
 # ~~~~~~~~~~~~~~~~~
 
@@ -31,14 +44,36 @@ preparers = {}
 # }
 
 eway_statuses = {
-    'Proforma\'d': [],
-    'Final': [],
-    'Amended': [],
-    'Paper Return': [],
-    'Next Year': [],
-    'Planning': [],
-    'Not Processed': []
+    'Proforma\'d': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Final': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Amended': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Paper Return': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Next Year': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Planning': [
+      'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+      ],
+    'Not Processed': ['Former']
 }
+
+# eway_statuses = {
+#     'Proforma\'d': [],
+#     'Final': [],
+#     'Amended': [],
+#     'Paper Return': [],
+#     'Next Year': [],
+#     'Planning': [],
+#     'Not Processed': []
+# }
 
 # ~~~~~~~~~~~~~~~~~ DO NOT EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
 

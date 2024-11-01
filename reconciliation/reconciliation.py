@@ -11,8 +11,9 @@ nonmatching_preparers = {}
 
 # create eway client objects and put into eway array
 with open('eway_clients.csv', newline='') as csvfile:
-  field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
-  reader = csv.DictReader(csvfile, fieldnames=field_names)
+  # field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+  # reader = csv.DictReader(csvfile, fieldnames=field_names)
+  reader = csv.DictReader(csvfile)
 
   for row in reader:
     client = resources.createClient(row)
@@ -20,8 +21,9 @@ with open('eway_clients.csv', newline='') as csvfile:
 
 # create lacerte client objects and put into lacerte array
 with open('lacerte_clients.csv', newline='') as csvfile:
-  field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
-  clients = csv.DictReader(csvfile, fieldnames=field_names)
+  # field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+  # clients = csv.DictReader(csvfile, fieldnames=field_names)
+  clients = csv.DictReader(csvfile)
 
   for row in clients:
     client = resources.createClient(row)
@@ -46,22 +48,35 @@ for lacerteClient in lacerte_clients:
 
 # write to csv files
 with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
+  field_names = ['Account Name', 'Preparer', 'Status']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  headers = ['Account Name', 'Preparer', 'Status']
   writer.writeheader()
   for name in clients_not_in_eway:
-    writer.writerow({name: clients_not_in_eway[name]})
+    writer.writerow({
+      'Account Name': name, 
+      'Preparer': clients_not_in_eway[name][0],
+      'Status': clients_not_in_eway[name][1]
+    })
 
 with open('nonmatching_addrs.csv', 'w', newline='') as csvfile:
+  field_names = ['Lacerte Account Name', 'eWay Address', 'Lacerte Address']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  headers = ['Lacerte Account Name', 'eWay Address', 'Lacerte Address']
   writer.writeheader()
   for name in nonmatching_addrs:
-    writer.writerow({name: nonmatching_addrs[name]})
+    writer.writerow({
+      'Lacerte Account Name': name, 
+      'eWay Address': nonmatching_addrs[name][0],
+      'Lacerte Address': nonmatching_addrs[name][1]
+    })
 
 with open('nonmatching_preparers.csv', 'w', newline='') as csvfile:
+  field_names = ['Lacerte Account Name', 'eWay Preparer', 'Lacerte Preparer']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  headers = ['Lacerte Account Name', 'eWay Preparer', 'Lacerte Preparer']
   writer.writeheader()
   for name in nonmatching_preparers:
-    writer.writerow({name: nonmatching_addrs[name]})
+    writer.writerow({
+      'Lacerte Account Name': name, 
+      'eWay Preparer': nonmatching_preparers[name][0],
+      'Lacerte Preparer': nonmatching_preparers[name][1]
+    })
+

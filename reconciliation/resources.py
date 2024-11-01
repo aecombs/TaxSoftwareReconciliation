@@ -7,8 +7,7 @@ class Client:
         names = account_name.split(',')
         self.account_name = account_name
         self.last_name = names[0].strip()
-        self.first_names = names[1].strip()
-        
+        self.first_names = names[1].split(' ')
         self.preparer = preparer
         self.status = status
         self.address = {
@@ -28,7 +27,6 @@ class Client:
 # Takes a CSV row (or dict) and returns a Client object with stringified and whitespace-stripped properties
 def createClient(row):
     # Clean up the data
-
     account_name = row['Account Name'].upper()
 
     # map preparer if it's a digit; this will only trigger if it's converting Lacerte clients
@@ -52,7 +50,7 @@ def createClient(row):
 
 
 # Checks whether names match, regardless of formatting
-def nameMatch(ewayClient, lacerteClient):
+def nameMatch(ewayClient: Client, lacerteClient: Client):
 
     # if the account names match exactly, exit early with True result
     if ewayClient.account_name == lacerteClient.account_name:
@@ -64,21 +62,21 @@ def nameMatch(ewayClient, lacerteClient):
 
     # Check first names for matches
     # clean up names
-    eway_split_names = ewayClient.first_names.split(' ')
-    lacerte_split_names = lacerteClient.first_names.split(' ')
+    eway_names = ewayClient.first_names
+    lacerte_names = lacerteClient.first_names
 
     # track match count; each client may have anywhere between 1 and 4+ first names (S vs MFJ with initials and maiden names)
     first_name_matches = 0
-    for name in eway_split_names:
-        if name != ('AND' or '&') and name in lacerte_split_names:
+    for name in eway_names:
+        if name != ('AND' or '&') and name in lacerte_names:
             first_name_matches += 1
 
     # ideal case: if at least two names match, exit early with True result
-    if first_name_matches >= 2 and len(eway_split_names) >= 2:
+    if first_name_matches >= 2 and len(eway_names) >= 2:
         return True
     else:
         # Single filer edge case. If this isn't a match, we've likely found a family member.
-        return first_name_matches == 1 and len(eway_split_names) == 1
+        return first_name_matches == 1 and len(eway_names) == 1
 
 def addrMatch(ewayClient, lacerteClient):
     # TODO: match apt/unit

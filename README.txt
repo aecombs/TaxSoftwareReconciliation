@@ -11,7 +11,7 @@ It checks agreement on three separate axes:
 
 To use this script, you'll need to replace the mock data in `eway_clients.csv` and `lacerte_clients.csv` with your actual client data.
 
-You'll also need update the `preparers.py` file. The required changes are as follows.
+You'll also need update the `preparers.py` file in the `reconciliation` module. The required changes are as follows.
 
 # Update the `preparers` dict to list each preparer's representative number as the key with the corresponding name as it appears in eWay as the value
 
@@ -66,4 +66,4 @@ Ex.:
 Rename both of these files approriately and replace the existing mock CSVs.
 
 # To Run
-From terminal, use the command `python3 main.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, and `nonmatching_preparers.csv` should all be generated.
+From terminal, use the command `python3 reconciliation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, and `nonmatching_preparers.csv` should all be generated.
