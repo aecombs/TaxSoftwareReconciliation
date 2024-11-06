@@ -11,9 +11,9 @@ It checks agreement on three separate axes:
 
 To use this script, you'll need to replace the mock data in `eway_clients.csv` and `lacerte_clients.csv` with your actual client data.
 
-You'll also need update the `preparers.py` file in the `reconciliation` module. The required changes are as follows.
+You'll also need make changes to the `preparers` and `eway_statuses` dict in the `resources.py` file. The required changes are as follows:
 
-# Update the `preparers` dict to list each preparer's representative number as the key with the corresponding name as it appears in eWay as the value
+# Update the `preparers` dict to list each preparer's representative number as the key with the corresponding name as it appears in eWay as the value.
 
 Ex.:
 
