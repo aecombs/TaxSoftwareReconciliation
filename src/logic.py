@@ -108,6 +108,7 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 	clients_not_in_eway = {}
 	nonmatching_addrs = {}
 	nonmatching_preparers = {}
+	nonmatching_statuses = {}
 
 	for lacerteClient in lacerteClients:
 		for ewayClient in ewayClients:
@@ -119,12 +120,15 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 				# if the preparers don't match, add to dict
 				if not preparerMatch(ewayClient, lacerteClient):
 					nonmatching_preparers[lacerteClient.account_name] = [ewayClient.preparer, lacerteClient.preparer]
-				# if there isn't a name match, add to dict and move on
+				# if the statuses don't correspond, add to dict
+				if not statusMatch(ewayClient, lacerteClient):
+					nonmatching_statuses[lacerteClient.account_name] = [ewayClient.status, lacerteClient.status]
+			# if there isn't a name match, add to dict and move on
 			else:
 				# clients_not_in_eway[lacerteClient.account_name] = lacerteClient
 				clients_not_in_eway[lacerteClient.account_name] = [lacerteClient.preparer, lacerteClient.status]
 				continue
-	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers
+	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses
 
 
 # data

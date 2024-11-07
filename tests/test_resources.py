@@ -16,13 +16,10 @@ class TestResources(unittest.TestCase):
   
   def test_createClient(self):
 
-    preparer_num = '6'
-    status_num = '5'
-
     row = {
       'Account Name': MFJ_name,
-      'Preparer': preparer_num,
-      'Status': status_num,
+      'Preparer': '6',
+      'Status': '5',
       'Street': MFJ_street,
       'City': MFJ_city,
       'State': MFJ_state,
@@ -41,35 +38,27 @@ class TestResources(unittest.TestCase):
     self.assertEqual(mock_client.address['Zip'], created_client.address['Zip'])
 
   def test_nameMatch(self):
-    name_formatting = "Gonzalez,   Daniel D. & Danielle F. "
-
-    name_nonmatching_S = "Scott, Zoey"
-    name_nonmatching_S2 ="Scott, Janet S."
-
-    name_nearmatch_single = "Gonzalez, Daniel"
-    name_nearmatch_married = "Gonzalez, Daniel and Gabriella"
-    name_nonmatching = "Gonzalez, Dania and Dani"
 
     name_formatting_client = logic.Client(
-      name_formatting, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Gonzalez,   Daniel D. & Danielle F. ", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
     
     non_matching_S_client = logic.Client(
-      name_nonmatching_S, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Scott, Zoey", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
 
     non_matching_S2_client = logic.Client(
-      name_nonmatching_S2, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Scott, Janet S.", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
 
     nearmatch_s_client = logic.Client(
-      name_nearmatch_single, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Gonzalez, Daniel", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
     nearmatch_married_client = logic.Client(
-      name_nearmatch_married, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Gonzalez, Daniel and Gabriella", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
     name_nonmatching_client = logic.Client(
-      name_nonmatching, MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
+      "Gonzalez, Dania and Dani", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
 
     self.assertTrue(logic.nameMatch(mock_client, name_formatting_client))
@@ -82,16 +71,11 @@ class TestResources(unittest.TestCase):
 
   def test_addrMatch(self):
 
-    nonmatching_street = '42 Wallaby Way'
-    nonmatching_city = 'Sydney'
-    nonmatching_state = 'AU'
-    nonmatching_zip = '87198'
-
     matching_addr_client = logic.Client(
       'bogus, name', '5', '20', MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
     nonmatching_addr_client = logic.Client(
-      MFJ_name, MFJ_e_preparer, MFJ_status_str, nonmatching_street, nonmatching_city, nonmatching_state, nonmatching_zip
+      MFJ_name, MFJ_e_preparer, MFJ_status_str, '42 Wallaby Way', 'Sydney', 'AU', '87198'
     )
     
     self.assertTrue(logic.addrMatch(mock_client, matching_addr_client))

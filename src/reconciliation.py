@@ -25,7 +25,7 @@ with open('lacerte_clients.csv', newline='') as csvfile:
     lacerte_clients.append(client)
 
 # check lacerteClient to find a matching ewayClient.
-clients_not_in_eway, nonmatching_addrs, nonmatching_preparers = logic.matchClients(eway_clients, lacerte_clients)
+clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses = logic.matchClients(eway_clients, lacerte_clients)
 
 # write to csv files
 with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
@@ -59,5 +59,16 @@ with open('nonmatching_preparers.csv', 'w', newline='') as csvfile:
       'Lacerte Account Name': name, 
       'eWay Preparer': nonmatching_preparers[name][0],
       'Lacerte Preparer': nonmatching_preparers[name][1]
+    })
+
+with open('nonmatching_statuses.csv', 'w', newline='') as csvfile:
+  field_names = ['Lacerte Account Name', 'eWay Status', 'Lacerte Status']
+  writer = csv.DictWriter(csvfile, fieldnames=field_names)
+  writer.writeheader()
+  for name in nonmatching_statuses:
+    writer.writerow({
+      'Lacerte Account Name': name, 
+      'eWay Status': nonmatching_statuses[name][0],
+      'Lacerte Status': nonmatching_statuses[name][1]
     })
 
