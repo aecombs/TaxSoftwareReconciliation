@@ -28,7 +28,7 @@ with open('lacerte_clients.csv', newline='') as csvfile:
 clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses = logic.matchClients(eway_clients, lacerte_clients)
 
 # write to csv files
-with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
+with open('results/clients_not_in_eway.csv', 'w', newline='') as csvfile:
   field_names = ['Account Name', 'Preparer', 'Status']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
   writer.writeheader()
@@ -39,7 +39,7 @@ with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
       'Status': client.status
     })
 
-with open('nonmatching_addrs.csv', 'w', newline='') as csvfile:
+with open('results/nonmatching_addrs.csv', 'w', newline='') as csvfile:
   field_names = ['Lacerte Account Name', 'eWay Address', 'Lacerte Address']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
   writer.writeheader()
@@ -50,7 +50,7 @@ with open('nonmatching_addrs.csv', 'w', newline='') as csvfile:
       'Lacerte Address': nonmatching_addrs[name][1]
     })
 
-with open('nonmatching_preparers.csv', 'w', newline='') as csvfile:
+with open('results/nonmatching_preparers.csv', 'w', newline='') as csvfile:
   field_names = ['Lacerte Account Name', 'eWay Preparer', 'Lacerte Preparer']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
   writer.writeheader()
@@ -61,7 +61,7 @@ with open('nonmatching_preparers.csv', 'w', newline='') as csvfile:
       'Lacerte Preparer': nonmatching_preparers[name][1]
     })
 
-with open('nonmatching_statuses.csv', 'w', newline='') as csvfile:
+with open('results/nonmatching_statuses.csv', 'w', newline='') as csvfile:
   field_names = ['Lacerte Account Name', 'eWay Status', 'Lacerte Status']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
   writer.writeheader()
