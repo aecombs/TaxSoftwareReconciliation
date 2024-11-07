@@ -1,3 +1,5 @@
+# classes
+
 class Client:
 
 	def __init__(self, account_name, preparer, status, street, city, state,
@@ -125,6 +127,7 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers
 
 
+# data
 
 # Here's the part of the doc that holds important but conditional data. Some of this will need to be edited to match your firm's specific requirements and setup.
 
