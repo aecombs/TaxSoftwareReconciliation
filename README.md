@@ -68,4 +68,6 @@ eway_statuses = {
 Rename both of these files approriately and replace the existing mock CSVs.
 
 ### To Run
-From terminal, use the command `python3 reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, and `nonmatching_preparers.csv` should all be generated with the relevant information you'll need to resolve discrepencies.
+In terminal, navigate to the  use the command `python3 reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, `nonmatching_preparers.csv`, and `nonmatching_statuses.csv` should all be generated in the `results` directory with the relevant information you'll need to resolve discrepencies.
+
+To run tests, use the command `python3 -m unittest discover tests`.

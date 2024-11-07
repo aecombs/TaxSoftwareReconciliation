@@ -199,16 +199,6 @@ eway_statuses = {
 	'Not Processed': ['Former']
 }
 
-# eway_statuses = {
-#     'Proforma\'d': [],
-#     'Final': [],
-#     'Amended': [],
-#     'Paper Return': [],
-#     'Next Year': [],
-#     'Planning': [],
-#     'Not Processed': []
-# }
-
 # ~~~~~~~~~~~~~~~~~ DO NOT EDIT BELOW THIS LINE ~~~~~~~~~~~~~~~~~
 
 lacerte_statuses = {
