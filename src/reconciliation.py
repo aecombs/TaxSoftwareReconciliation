@@ -1,13 +1,8 @@
 import csv
-import resources
+import logic
 
 eway_clients = []
 lacerte_clients = []
-
-clients_not_in_eway = {}
-nonmatching_addrs = {}
-nonmatching_preparers = {}
-# partial_matches = {} # this would be to save any matches on last names but not first
 
 # create eway client objects and put into eway array
 with open('eway_clients.csv', newline='') as csvfile:
@@ -16,7 +11,7 @@ with open('eway_clients.csv', newline='') as csvfile:
   reader = csv.DictReader(csvfile)
 
   for row in reader:
-    client = resources.createClient(row)
+    client = logic.createClient(row)
     eway_clients.append(client)
 
 # create lacerte client objects and put into lacerte array
@@ -26,25 +21,11 @@ with open('lacerte_clients.csv', newline='') as csvfile:
   clients = csv.DictReader(csvfile)
 
   for row in clients:
-    client = resources.createClient(row)
+    client = logic.createClient(row)
     lacerte_clients.append(client)
 
 # check lacerteClient to find a matching ewayClient.
-for lacerteClient in lacerte_clients:
-  for ewayClient in eway_clients:
-    # check is there's a name match
-    if resources.nameMatch(ewayClient, lacerteClient):
-      # if the addresses don't match, add to dict
-      if not resources.addrMatch(ewayClient, lacerteClient):
-        nonmatching_addrs[lacerteClient.account_name] = [ewayClient.address, lacerteClient.address]
-      # if the preparers don't match, add to dict
-      if not resources.preparerMatch(ewayClient, lacerteClient):
-        nonmatching_preparers[lacerteClient.account_name] = [ewayClient.preparer, lacerteClient.preparer]
-    # if there isn't a name match, add to dict and move on
-    else:
-      # clients_not_in_eway[lacerteClient.account_name] = lacerteClient
-      clients_not_in_eway[lacerteClient.account_name] = [lacerteClient.preparer, lacerteClient.status]
-      continue
+clients_not_in_eway, nonmatching_addrs, nonmatching_preparers = logic.matchClients(eway_clients, lacerte_clients)
 
 # write to csv files
 with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
