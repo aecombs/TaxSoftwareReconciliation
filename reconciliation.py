@@ -32,11 +32,11 @@ with open('clients_not_in_eway.csv', 'w', newline='') as csvfile:
   field_names = ['Account Name', 'Preparer', 'Status']
   writer = csv.DictWriter(csvfile, fieldnames=field_names)
   writer.writeheader()
-  for name in clients_not_in_eway:
+  for client in clients_not_in_eway:
     writer.writerow({
-      'Account Name': name, 
-      'Preparer': clients_not_in_eway[name][0],
-      'Status': clients_not_in_eway[name][1]
+      'Account Name': client.account_name,
+      'Preparer': client.preparer,
+      'Status': client.status
     })
 
 with open('nonmatching_addrs.csv', 'w', newline='') as csvfile:
@@ -45,7 +45,7 @@ with open('nonmatching_addrs.csv', 'w', newline='') as csvfile:
   writer.writeheader()
   for name in nonmatching_addrs:
     writer.writerow({
-      'Lacerte Account Name': name, 
+      'Lacerte Account Name': name,
       'eWay Address': nonmatching_addrs[name][0],
       'Lacerte Address': nonmatching_addrs[name][1]
     })
@@ -56,7 +56,7 @@ with open('nonmatching_preparers.csv', 'w', newline='') as csvfile:
   writer.writeheader()
   for name in nonmatching_preparers:
     writer.writerow({
-      'Lacerte Account Name': name, 
+      'Lacerte Account Name': name,
       'eWay Preparer': nonmatching_preparers[name][0],
       'Lacerte Preparer': nonmatching_preparers[name][1]
     })
@@ -67,7 +67,7 @@ with open('nonmatching_statuses.csv', 'w', newline='') as csvfile:
   writer.writeheader()
   for name in nonmatching_statuses:
     writer.writerow({
-      'Lacerte Account Name': name, 
+      'Lacerte Account Name': name,
       'eWay Status': nonmatching_statuses[name][0],
       'Lacerte Status': nonmatching_statuses[name][1]
     })

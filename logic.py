@@ -105,7 +105,7 @@ def statusMatch(ewayClient: Client, lacerteClient: Client):
 	return eway_status in eway_statuses[lacerte_status]
 
 def matchClients(ewayClients: dict, lacerteClients: dict):
-	clients_not_in_eway = {}
+	clients_not_in_eway = lacerteClients.copy()
 	nonmatching_addrs = {}
 	nonmatching_preparers = {}
 	nonmatching_statuses = {}
@@ -114,6 +114,7 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 		for ewayClient in ewayClients:
 		# check is there's a name match
 			if nameMatch(ewayClient, lacerteClient):
+				clients_not_in_eway.remove(lacerteClient)
 				# if the addresses don't match, add to dict
 				if not addrMatch(ewayClient, lacerteClient):
 					nonmatching_addrs[lacerteClient.account_name] = [ewayClient.address, lacerteClient.address]
@@ -123,11 +124,10 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 				# if the statuses don't correspond, add to dict
 				if not statusMatch(ewayClient, lacerteClient):
 					nonmatching_statuses[lacerteClient.account_name] = [ewayClient.status, lacerteClient.status]
-			# if there isn't a name match, add to dict and move on
+			# if there isn't a name match, leave in clients_not_in_eway dict and move on
 			else:
-				# clients_not_in_eway[lacerteClient.account_name] = lacerteClient
-				clients_not_in_eway[lacerteClient.account_name] = [lacerteClient.preparer, lacerteClient.status]
 				continue
+
 	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses
 
 
@@ -179,22 +179,22 @@ preparers = {
 
 eway_statuses = {
 	'Proforma\'d': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Final': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Amended': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Paper Return': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Next Year': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Planning': [
-		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'No Appt', 'Mail', 'No Mail'
+		'Tax Client - Appt (In Person)', 'Tax Client - Appt (Teams)', 'Tax Client - No Appt', 'Tax Client - Mail', 'Tax Client - No Mail'
 		],
 	'Not Processed': ['Former']
 }
