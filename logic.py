@@ -7,8 +7,8 @@ class Client:
 		names = account_name.split(',')
 		self.account_name = account_name
 		self.last_name = names[0].strip()
-		
 		self.first_names = names[1].strip().split(' ')
+
 		# clean up items in first_names array
 		unwanted_strs = ['and', 'AND', 'And', '&', '.', ',']
 		for str in self.first_names:
@@ -114,7 +114,8 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 		for ewayClient in ewayClients:
 		# check is there's a name match
 			if nameMatch(ewayClient, lacerteClient):
-				clients_not_in_eway.remove(lacerteClient)
+				if lacerteClient in clients_not_in_eway:
+					clients_not_in_eway.remove(lacerteClient)
 				# if the addresses don't match, add to dict
 				if not addrMatch(ewayClient, lacerteClient):
 					nonmatching_addrs[lacerteClient.account_name] = [ewayClient.address, lacerteClient.address]
