@@ -41,9 +41,8 @@ eway_statuses = {
 ```
 
 #### From Lacerte:
-- Group select the clients whose data you want
+- Group select the clients whose data you want to reconcile
 - Export that group into a Comma Delimited file with the following columns:
-  - Account Name
   - Preparer
   - Current Status
   - Client Full Name, last name first
@@ -52,22 +51,25 @@ eway_statuses = {
   - City
   - State
   - Zip Code
+- Manually edit the CSV to add the headers as follows: `Preparer, Status, Account Name, Street, Apt, City, State, Zip`
+- Rename the file to `lacerte_clients.csv` and replace the existing mock CSV
 
 #### From eWay:
 - Display the columns:
-  - Account Name
   - Owner
   - Categories
+  - Account Name
   - Street (Business)
   - City (Business)
   - State (Business)
   - ZIP/ Postal Code (Business)
 - Select Export to Excel at the top
-- After saving, open and save as a CSV
+- After saving, open and save as a CSV (Comma delimited) (*.csv) (_Note: do NOT save as 'CSV UTF-8 (Comma delimited) (*.csv)'_)
+- Manually edit the CSV to add the headers as follows: `Preparer, Status, Account Name, Street, Apt, City, State, Zip`
+- Rename the file to `eway_clients.csv` and replace the existing mock CSV
 
-Rename both of these files approriately and replace the existing mock CSVs.
 
 ### To Run
-In terminal, navigate to the  use the command `python3 reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, `nonmatching_preparers.csv`, and `nonmatching_statuses.csv` should all be generated in the `results` directory with the relevant information you'll need to resolve discrepencies.
+In terminal, navigate to the main directory of this project. Execute the script by using the command `python reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, `nonmatching_preparers.csv`, and `nonmatching_statuses.csv` will be generated in the `results` directory with the relevant information you'll need to manually resolve discrepencies.
 
-To run tests, use the command `python3 -m unittest discover tests`.
+To run tests, use the command `python -m unittest discover tests`.
