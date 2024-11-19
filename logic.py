@@ -6,6 +6,7 @@ class Client:
 							zip):
 		names = account_name.split(',')
 		self.account_name = account_name
+		print(account_name)
 		self.last_name = names[0].strip()
 		self.first_names = names[1].strip().split(' ')
 
@@ -158,11 +159,13 @@ preparers = {
 	'4': 'Kathryn Kauffman',
 	'5': 'Jenny Wang',
 	'6': 'Caitlin White',
-	'7': '',
+	'7': 'Smita Patil',
 	'8': 'Kathy McGinnis',
-	'9': '',
+	'9': 'Ron Hogsett',
+        '10': 'Self Prepared',
 	'11': 'Dennis Daly',
-	'12': 'Merry C Davis'
+	'12': 'Merry C Davis',
+        '13': 'kk'
 }
 
 # ~~~~~~~~~~~~~~~~~
@@ -206,14 +209,13 @@ eway_statuses = {
 
 lacerte_statuses = {
 	'1': 'Proforma\'d',
+        '2': 'Info Pending',
+        '3': 'Under Review',
+        '4': 'On Extension',
 	'5': 'Final',
 	'6': 'Amended',
 	'7': 'Paper Return',
 	'8': 'Next Year',
 	'9': 'Planning',
 	'20': 'Not Processed'
-	# TODO: Will update these with corresponding values:
-	# 'Info Pending',
-	# 'Under Review',
-	# 'On Extension',
 }
