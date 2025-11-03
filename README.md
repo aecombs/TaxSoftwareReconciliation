@@ -70,6 +70,6 @@ eway_statuses = {
 
 
 ### To Run
-In terminal, navigate to the main directory of this project. Execute the script by using the command `python reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, `nonmatching_preparers.csv`, and `nonmatching_statuses.csv` will be generated in the `results` directory with the relevant information you'll need to manually resolve discrepencies.
+In terminal, navigate to the main directory of this project. Execute the script by using the command `python reconcilation.py`. The files `clients_not_in_eway.csv`, `nonmatching_addrs.csv`, `nonmatching_preparers.csv`, and `nonmatching_statuses.csv` will be generated in the `results` directory with the relevant information you'll need to manually resolve discrepancies.
 
 To run tests, use the command `python -m unittest discover tests`.

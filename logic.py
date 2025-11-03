@@ -2,8 +2,9 @@
 
 class Client:
 
-	def __init__(self, account_name, preparer, status, street, city, state,
-							zip):
+	def __init__(self, account_name, preparer, status, street, apt, city, state,
+							zip, t_email, s_email, t_cell, s_cell,
+							t_home, s_home, t_work, s_work):
 		names = account_name.split(',')
 		self.account_name = account_name
 		print(account_name)
@@ -20,12 +21,23 @@ class Client:
 		self.status = status
 		self.address = {
 				'Street': street,
-				# 'Apt': apt,
+				'Apt': apt,
 				'City': city,
 				'State': state,
 				'Zip': zip
 		}
 
+		self.taxpayerEmail = t_email
+		self.spouseEmail = s_email
+
+		# TODO: add non-matching phone number feature ... also, clean up data!
+		# self.taxpayerCell = t_cell
+		# self.spouseCell = s_cell
+		# self.taxpayerHome = t_home
+		# self.spouseHome = s_home
+		# self.taxpayerWork = t_work
+		# self.spouseWork = s_work
+		
 		def __str__(self):
 				return f"{self.account_name}"
 
@@ -107,11 +119,56 @@ def statusMatch(ewayClient: Client, lacerteClient: Client):
 
 	return eway_status in eway_statuses[lacerte_status]
 
+def emailMatch(ewayClient: Client, lacerteClient: Client):
+	# taxpayer
+  eway_taxpayer_email = ewayClient.taxpayerEmail
+  lacerte_taxpayer_email = lacerteClient.taxpayerEmail
+
+	# spouse
+  eway_spouse_email = ewayClient.spouseEmail
+  lacerte_spouse_email = lacerteClient.spouseEmail
+
+  return (eway_taxpayer_email == lacerte_taxpayer_email and eway_spouse_email == lacerte_spouse_email)
+
+# TODO: add non-matching phone number feature
+# def phoneMatch(ewayClient: Client, lacerteClient: Client):
+# 	# taxpayer home phone
+#   eway_taxpayer_home = ewayClient.taxpayerHomePhone
+#   lacerte_taxpayer_home = lacerteClient.taxpayerHomePhone
+
+# 	# taxpayer mobile phone
+#   eway_taxpayer_mobile = ewayClient.taxpayerMobilePhone
+#   lacerte_taxpayer_mobile = lacerteClient.taxpayerMobilePhone
+
+# 	# taxpayer work phone
+#   eway_taxpayer_work = ewayClient.taxpayerWorkPhone
+#   lacerte_taxpayer_work = lacerteClient.taxpayerWorkPhone
+
+
+
+# 	# spouse home phone
+#   eway_spouse_home = ewayClient.spouseHomePhone
+#   lacerte_spouse_home = lacerteClient.spouseHomePhone
+
+# 	# spouse mobile phone
+#   eway_spouse_mobile = ewayClient.spouseMobilePhone
+#   lacerte_spouse_mobile = lacerteClient.spouseMobilePhone
+
+# 	# spouse work phone
+#   eway_spouse_work = ewayClient.spouseWorkPhone
+#   lacerte_spouse_work = lacerteClient.spouseWorkPhone
+
+
+
+# 	return (eway_taxpayer_email == lacerte_taxpayer_email and eway_spouse_email == lacerte_spouse_email)
+
 def matchClients(ewayClients: dict, lacerteClients: dict):
-	clients_not_in_eway = lacerteClients.copy()
-	nonmatching_addrs = {}
-	nonmatching_preparers = {}
-	nonmatching_statuses = {}
+  clients_not_in_eway = lacerteClients.copy()
+  nonmatching_addrs = {}
+  nonmatching_preparers = {}
+  nonmatching_statuses = {}
+  nonmatching_email = {}
+  # nonmatching_phone = {} # TODO: add non-matching phone number feature
 
 	for lacerteClient in lacerteClients:
 		for ewayClient in ewayClients:
@@ -128,6 +185,14 @@ def matchClients(ewayClients: dict, lacerteClients: dict):
 				# if the statuses don't correspond, add to dict
 				if not statusMatch(ewayClient, lacerteClient):
 					nonmatching_statuses[lacerteClient.account_name] = [ewayClient.status, lacerteClient.status, lacerteClient.preparer]
+				if not emailMatch(ewayClient, lacerteClient):
+					nonmatching_email[lacerteClient.account_name] = [
+						ewayClient.taxpayerEmail,
+						lacerteClient.taxpayerEmail,
+						ewayClient.spouseEmail,
+						lacerteClient.spouseEmail,
+						lacerteClient.preparer
+					]
 			# if there isn't a name match, leave in clients_not_in_eway dict and move on
 			else:
 				continue
@@ -162,10 +227,7 @@ preparers = {
 	'7': 'Smita Patil',
 	'8': 'Kathy McGinnis',
 	'9': 'Ron Hogsett',
-        '10': 'Self Prepared',
-	'11': 'Dennis Daly',
-	'12': 'Merry C Davis',
-        '13': 'kk'
+	'10': 'Self Prepared'
 }
 
 # ~~~~~~~~~~~~~~~~~
@@ -209,9 +271,9 @@ eway_statuses = {
 
 lacerte_statuses = {
 	'1': 'Proforma\'d',
-        '2': 'Info Pending',
-        '3': 'Under Review',
-        '4': 'On Extension',
+	'2': 'Info Pending',
+	'3': 'Under Review',
+	'4': 'On Extension',
 	'5': 'Final',
 	'6': 'Amended',
 	'7': 'Paper Return',
