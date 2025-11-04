@@ -6,7 +6,7 @@ lacerte_clients = []
 
 # create eway client objects and put into eway array
 with open('eway_clients.csv', newline='') as csvfile:
-	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip", "Taxpayer Email", "Spouse Email"]
 	# reader = csv.DictReader(csvfile, fieldnames=field_names)
 	reader = csv.DictReader(csvfile)
 
@@ -16,7 +16,7 @@ with open('eway_clients.csv', newline='') as csvfile:
 
 # create lacerte client objects and put into lacerte array
 with open('lacerte_clients.csv', newline='') as csvfile:
-	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip", "Taxpayer Email", "Spouse Email"]
 	# clients = csv.DictReader(csvfile, fieldnames=field_names)
 	clients = csv.DictReader(csvfile)
 

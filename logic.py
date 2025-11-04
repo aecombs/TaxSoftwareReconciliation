@@ -67,10 +67,10 @@ def create_client(row):
 	zipcode = str(row['Zip']).strip()
 
 	t_email = str(row['Taxpayer Email']).strip().lower()
-	s_email = str(row['Taxpayer Email']).strip().lower()
+	s_email = str(row['Spouse Email']).strip().lower()
 
 	# create and return Client object
-	return Client(account_name, preparer, status, street, city, state, zipcode)
+	return Client(account_name, preparer, status, street, city, state, zipcode, t_email, s_email)
 
 
 # Checks whether names match, regardless of formatting
