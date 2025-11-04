@@ -37,7 +37,7 @@ class Client:
 		# self.spouseWork = s_work
 
 	def __str__(self):
-		return f"{self.account_name}"
+		return "{self.account_name}"
 
 
 # functions
