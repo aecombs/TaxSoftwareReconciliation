@@ -3,8 +3,7 @@
 class Client:
 
 	def __init__(self, account_name, preparer, status, street, apt, city, state,
-							zip, t_email, s_email, t_cell, s_cell,
-							t_home, s_home, t_work, s_work):
+							zip, t_email, s_email):
 		names = account_name.split(',')
 		self.account_name = account_name
 		print(account_name)
@@ -64,13 +63,13 @@ def create_client(row):
 	# apt = str(row['Apt']).strip().title()  # can be empty
 	city = str(row['City']).strip().title()
 	state = str(row['State']).strip().upper()
-	zipcode = str(row['Zip']).strip()
+	zip = str(row['Zip']).strip()
 
 	t_email = str(row['Taxpayer Email']).strip().lower()
 	s_email = str(row['Spouse Email']).strip().lower()
 
 	# create and return Client object
-	return Client(account_name, preparer, status, street, city, state, zipcode, t_email, s_email)
+	return Client(account_name, preparer, status, street, city, state, zip, t_email, s_email)
 
 
 # Checks whether names match, regardless of formatting
