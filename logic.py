@@ -2,7 +2,7 @@
 
 class Client:
 
-	def __init__(self, account_name, preparer, status, street, apt, city, state,
+	def __init__(self, account_name, preparer, status, street, city, state,
 							zip, t_email, s_email):
 		names = account_name.split(',')
 		self.account_name = account_name
