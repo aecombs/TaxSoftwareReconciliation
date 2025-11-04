@@ -6,90 +6,90 @@ lacerte_clients = []
 
 # create eway client objects and put into eway array
 with open('eway_clients.csv', newline='') as csvfile:
-  # field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
-  # reader = csv.DictReader(csvfile, fieldnames=field_names)
-  reader = csv.DictReader(csvfile)
+	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+	# reader = csv.DictReader(csvfile, fieldnames=field_names)
+	reader = csv.DictReader(csvfile)
 
-  for row in reader:
-    client = logic.createClient(row)
-    eway_clients.append(client)
+	for row in reader:
+		client = logic.create_client(row)
+		eway_clients.append(client)
 
 # create lacerte client objects and put into lacerte array
 with open('lacerte_clients.csv', newline='') as csvfile:
-  # field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
-  # clients = csv.DictReader(csvfile, fieldnames=field_names)
-  clients = csv.DictReader(csvfile)
+	# field_names = ["Account Name","Preparer","Status","Street","City","State", "Zip"]
+	# clients = csv.DictReader(csvfile, fieldnames=field_names)
+	clients = csv.DictReader(csvfile)
 
-  for row in clients:
-    client = logic.createClient(row)
-    lacerte_clients.append(client)
+	for row in clients:
+		client = logic.create_client(row)
+		lacerte_clients.append(client)
 
 # check lacerteClient to find a matching ewayClient.
 (clients_not_in_eway, nonmatching_addrs, nonmatching_preparers,
- nonmatching_statuses, nonmatching_email, nonmatching_phone) = logic.matchClients(eway_clients, lacerte_clients)
+ nonmatching_statuses, nonmatching_emails) = logic.match_clients(eway_clients, lacerte_clients)
 
 # write to csv files
 with open('results/clients_not_in_eway.csv', 'w', newline='') as csvfile:
-  field_names = ['Account Name', 'Preparer', 'Status']
-  writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  writer.writeheader()
-  for client in clients_not_in_eway:
-    writer.writerow({
-      'Account Name': client.account_name,
-      'Preparer': client.preparer,
-      'Status': client.status
-    })
+	field_names = ['Account Name', 'Preparer', 'Status']
+	writer = csv.DictWriter(csvfile, fieldnames=field_names)
+	writer.writeheader()
+	for client in clients_not_in_eway:
+		writer.writerow({
+			'Account Name': client.account_name,
+			'Preparer': client.preparer,
+			'Status': client.status
+		})
 
 with open('results/nonmatching_addrs.csv', 'w', newline='') as csvfile:
-  field_names = ['Lacerte Preparer', 'Lacerte Account Name', 'eWay Address', 'Lacerte Address']
-  writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  writer.writeheader()
-  for name in nonmatching_addrs:
-    writer.writerow({
-      'Lacerte Preparer': nonmatching_addrs[name][2],
-      'Lacerte Account Name': name,
-      'eWay Address': nonmatching_addrs[name][0],
-      'Lacerte Address': nonmatching_addrs[name][1]
-    })
+	field_names = ['Lacerte Preparer', 'Lacerte Account Name', 'eWay Address', 'Lacerte Address']
+	writer = csv.DictWriter(csvfile, fieldnames=field_names)
+	writer.writeheader()
+	for name in nonmatching_addrs:
+		writer.writerow({
+			'Lacerte Preparer': nonmatching_addrs[name][2],
+			'Lacerte Account Name': name,
+			'eWay Address': nonmatching_addrs[name][0],
+			'Lacerte Address': nonmatching_addrs[name][1]
+		})
 
 with open('results/nonmatching_preparers.csv', 'w', newline='') as csvfile:
-  field_names = ['Lacerte Account Name', 'eWay Preparer', 'Lacerte Preparer']
-  writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  writer.writeheader()
-  for name in nonmatching_preparers:
-    writer.writerow({
-      'Lacerte Account Name': name,
-      'eWay Preparer': nonmatching_preparers[name][0],
-      'Lacerte Preparer': nonmatching_preparers[name][1]
-    })
+	field_names = ['Lacerte Account Name', 'eWay Preparer', 'Lacerte Preparer']
+	writer = csv.DictWriter(csvfile, fieldnames=field_names)
+	writer.writeheader()
+	for name in nonmatching_preparers:
+		writer.writerow({
+			'Lacerte Account Name': name,
+			'eWay Preparer': nonmatching_preparers[name][0],
+			'Lacerte Preparer': nonmatching_preparers[name][1]
+		})
 
 with open('results/nonmatching_statuses.csv', 'w', newline='') as csvfile:
-  field_names = ['Lacerte Preparer', 'Lacerte Account Name', 'eWay Status', 'Lacerte Status']
-  writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  writer.writeheader()
-  for name in nonmatching_statuses:
-    writer.writerow({
-      'Lacerte Preparer': nonmatching_statuses[name][2],
-      'Lacerte Account Name': name,
-      'eWay Status': nonmatching_statuses[name][0],
-      'Lacerte Status': nonmatching_statuses[name][1]
-    })
+	field_names = ['Lacerte Preparer', 'Lacerte Account Name', 'eWay Status', 'Lacerte Status']
+	writer = csv.DictWriter(csvfile, fieldnames=field_names)
+	writer.writeheader()
+	for name in nonmatching_statuses:
+		writer.writerow({
+			'Lacerte Preparer': nonmatching_statuses[name][2],
+			'Lacerte Account Name': name,
+			'eWay Status': nonmatching_statuses[name][0],
+			'Lacerte Status': nonmatching_statuses[name][1]
+		})
 
-with open('results/nonmatching_email.csv', 'w', newline='') as csvfile:
-  field_names = ['Lacerte Preparer', 'Lacerte Account Name',
-                 'eWay Taxpayer Email', 'Lacerte Taxpayer Email',
-                 'eWay Spouse Email', 'Lacerte Spouse Email']
-  writer = csv.DictWriter(csvfile, fieldnames=field_names)
-  writer.writeheader()
-  for name in nonmatching_email:
-    writer.writerow({
-      'Lacerte Preparer': nonmatching_email[name][4],
-      'Lacerte Account Name': name,
-      'eWay Taxpayer Email': nonmatching_email[name][0],
-      'Lacerte Taxpayer Email': nonmatching_email[name][1],
-      'eWay Spouse Email': nonmatching_email[name][2],
-      'Lacerte Spouse Email': nonmatching_email[name][3]
-    })
+with open('results/nonmatching_emails.csv', 'w', newline='') as csvfile:
+	field_names = ['Lacerte Preparer', 'Lacerte Account Name',
+								 'eWay Taxpayer Email', 'Lacerte Taxpayer Email',
+								 'eWay Spouse Email', 'Lacerte Spouse Email']
+	writer = csv.DictWriter(csvfile, fieldnames=field_names)
+	writer.writeheader()
+	for name in nonmatching_emails:
+		writer.writerow({
+			'Lacerte Preparer': nonmatching_emails[name][4],
+			'Lacerte Account Name': name,
+			'eWay Taxpayer Email': nonmatching_emails[name][0],
+			'Lacerte Taxpayer Email': nonmatching_emails[name][1],
+			'eWay Spouse Email': nonmatching_emails[name][2],
+			'Lacerte Spouse Email': nonmatching_emails[name][3]
+		})
 
 
 # TODO: add missing phone numbers feature

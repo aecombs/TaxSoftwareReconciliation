@@ -29,7 +29,6 @@ class Client:
 
 		self.taxpayerEmail = t_email
 		self.spouseEmail = s_email
-
 		# TODO: add non-matching phone number feature ... also, clean up data!
 		# self.taxpayerCell = t_cell
 		# self.spouseCell = s_cell
@@ -37,15 +36,15 @@ class Client:
 		# self.spouseHome = s_home
 		# self.taxpayerWork = t_work
 		# self.spouseWork = s_work
-		
-		def __str__(self):
-				return f"{self.account_name}"
+
+	def __str__(self):
+		return f"{self.account_name}"
 
 
 # functions
 
 # Takes a CSV row (or dict) and returns a Client object with stringified and whitespace-stripped properties
-def createClient(row):
+def create_client(row):
 	# Clean up the data
 	account_name = row['Account Name'].title()
 
@@ -65,26 +64,29 @@ def createClient(row):
 	# apt = str(row['Apt']).strip().title()  # can be empty
 	city = str(row['City']).strip().title()
 	state = str(row['State']).strip().upper()
-	zip = str(row['Zip']).strip()
+	zipcode = str(row['Zip']).strip()
+
+	t_email = str(row['Taxpayer Email']).strip().lower()
+	s_email = str(row['Taxpayer Email']).strip().lower()
 
 	# create and return Client object
-	return Client(account_name, preparer, status, street, city, state, zip)
+	return Client(account_name, preparer, status, street, city, state, zipcode)
 
 
 # Checks whether names match, regardless of formatting
-def nameMatch(ewayClient: Client, lacerteClient: Client):
+def name_match(eway_client: Client, lacerte_client: Client):
 	# if the account names match exactly, exit early with True result
-	if ewayClient.account_name == lacerteClient.account_name:
+	if eway_client.account_name == lacerte_client.account_name:
 		return True
 	
 	# if the last names don't match, exit early with False result
-	if ewayClient.last_name != lacerteClient.last_name:
+	if eway_client.last_name != lacerte_client.last_name:
 		return False
 
 	# Check first names for matches
 	# clean up names
-	eway_names = ewayClient.first_names
-	lacerte_names = lacerteClient.first_names
+	eway_names = eway_client.first_names
+	lacerte_names = lacerte_client.first_names
 
 	# track match count; each client may have anywhere between 1 and 4+ first names (S vs MFJ with initials and maiden names)
 	first_name_matches = 0
@@ -99,105 +101,105 @@ def nameMatch(ewayClient: Client, lacerteClient: Client):
 			# Single filer edge case. If this isn't a match, we've likely found a family member.
 		return first_name_matches == 1 and len(eway_names) == 1
 
-def addrMatch(ewayClient: Client, lacerteClient: Client):
+def addr_match(eway_client: Client, lacerte_client: Client):
 	# TODO: match apt/unit
-	# lacerteApt = lacerteClient.address['Apt']
+	# lacerteApt = lacerte_client.address['Apt']
 
-	return ewayClient.address['Street'] == lacerteClient.address[
-		'Street'] and ewayClient.address['City'] == lacerteClient.address[
-		'City'] and ewayClient.address['State'] == lacerteClient.address[
-		'State'] and ewayClient.address['Zip'] == lacerteClient.address['Zip']
+	return eway_client.address['Street'] == lacerte_client.address[
+		'Street'] and eway_client.address['City'] == lacerte_client.address[
+		'City'] and eway_client.address['State'] == lacerte_client.address[
+		'State'] and eway_client.address['Zip'] == lacerte_client.address['Zip']
 
 
 # Checks whether the preparers match
-def preparerMatch(ewayClient: Client, lacerteClient: Client):
-	return ewayClient.preparer == lacerteClient.preparer
+def preparer_match(eway_client: Client, lacerte_client: Client):
+	return eway_client.preparer == lacerte_client.preparer
 
-def statusMatch(ewayClient: Client, lacerteClient: Client):
-	eway_status = ewayClient.status
-	lacerte_status = lacerteClient.status
+def statusMatch(eway_client: Client, lacerte_client: Client):
+	eway_status = eway_client.status
+	lacerte_status = lacerte_client.status
 
 	return eway_status in eway_statuses[lacerte_status]
 
-def emailMatch(ewayClient: Client, lacerteClient: Client):
+def emailMatch(eway_client: Client, lacerte_client: Client):
 	# taxpayer
-  eway_taxpayer_email = ewayClient.taxpayerEmail
-  lacerte_taxpayer_email = lacerteClient.taxpayerEmail
+	eway_taxpayer_email = eway_client.taxpayerEmail
+	lacerte_taxpayer_email = lacerte_client.taxpayerEmail
 
 	# spouse
-  eway_spouse_email = ewayClient.spouseEmail
-  lacerte_spouse_email = lacerteClient.spouseEmail
+	eway_spouse_email = eway_client.spouseEmail
+	lacerte_spouse_email = lacerte_client.spouseEmail
 
-  return (eway_taxpayer_email == lacerte_taxpayer_email and eway_spouse_email == lacerte_spouse_email)
+	return (eway_taxpayer_email == lacerte_taxpayer_email and eway_spouse_email == lacerte_spouse_email)
 
 # TODO: add non-matching phone number feature
-# def phoneMatch(ewayClient: Client, lacerteClient: Client):
+# def phoneMatch(eway_client: Client, lacerte_client: Client):
 # 	# taxpayer home phone
-#   eway_taxpayer_home = ewayClient.taxpayerHomePhone
-#   lacerte_taxpayer_home = lacerteClient.taxpayerHomePhone
+#   eway_taxpayer_home = eway_client.taxpayerHomePhone
+#   lacerte_taxpayer_home = lacerte_client.taxpayerHomePhone
 
 # 	# taxpayer mobile phone
-#   eway_taxpayer_mobile = ewayClient.taxpayerMobilePhone
-#   lacerte_taxpayer_mobile = lacerteClient.taxpayerMobilePhone
+#   eway_taxpayer_mobile = eway_client.taxpayerMobilePhone
+#   lacerte_taxpayer_mobile = lacerte_client.taxpayerMobilePhone
 
 # 	# taxpayer work phone
-#   eway_taxpayer_work = ewayClient.taxpayerWorkPhone
-#   lacerte_taxpayer_work = lacerteClient.taxpayerWorkPhone
+#   eway_taxpayer_work = eway_client.taxpayerWorkPhone
+#   lacerte_taxpayer_work = lacerte_client.taxpayerWorkPhone
 
 
 
 # 	# spouse home phone
-#   eway_spouse_home = ewayClient.spouseHomePhone
-#   lacerte_spouse_home = lacerteClient.spouseHomePhone
+#   eway_spouse_home = eway_client.spouseHomePhone
+#   lacerte_spouse_home = lacerte_client.spouseHomePhone
 
 # 	# spouse mobile phone
-#   eway_spouse_mobile = ewayClient.spouseMobilePhone
-#   lacerte_spouse_mobile = lacerteClient.spouseMobilePhone
+#   eway_spouse_mobile = eway_client.spouseMobilePhone
+#   lacerte_spouse_mobile = lacerte_client.spouseMobilePhone
 
 # 	# spouse work phone
-#   eway_spouse_work = ewayClient.spouseWorkPhone
-#   lacerte_spouse_work = lacerteClient.spouseWorkPhone
+#   eway_spouse_work = eway_client.spouseWorkPhone
+#   lacerte_spouse_work = lacerte_client.spouseWorkPhone
 
 
 
 # 	return (eway_taxpayer_email == lacerte_taxpayer_email and eway_spouse_email == lacerte_spouse_email)
 
-def matchClients(ewayClients: dict, lacerteClients: dict):
-  clients_not_in_eway = lacerteClients.copy()
-  nonmatching_addrs = {}
-  nonmatching_preparers = {}
-  nonmatching_statuses = {}
-  nonmatching_email = {}
-  # nonmatching_phone = {} # TODO: add non-matching phone number feature
+def match_clients(eway_clients: dict, lacerte_clients: dict):
+	clients_not_in_eway = lacerte_clients.copy()
+	nonmatching_addrs = {}
+	nonmatching_preparers = {}
+	nonmatching_statuses = {}
+	nonmatching_emails = {}
+	# nonmatching_phone = {} # TODO: add non-matching phone number feature
 
-	for lacerteClient in lacerteClients:
-		for ewayClient in ewayClients:
+	for lacerte_client in lacerte_clients:
+		for eway_client in eway_clients:
 		# check is there's a name match
-			if nameMatch(ewayClient, lacerteClient):
-				if lacerteClient in clients_not_in_eway:
-					clients_not_in_eway.remove(lacerteClient)
+			if name_match(eway_client, lacerte_client):
+				if lacerte_client in clients_not_in_eway:
+					clients_not_in_eway.pop(lacerte_client)
 				# if the addresses don't match, add to dict
-				if not addrMatch(ewayClient, lacerteClient):
-					nonmatching_addrs[lacerteClient.account_name] = [ewayClient.address, lacerteClient.address, lacerteClient.preparer]
+				if not addr_match(eway_client, lacerte_client):
+					nonmatching_addrs[lacerte_client.account_name] = [eway_client.address, lacerte_client.address, lacerte_client.preparer]
 				# if the preparers don't match, add to dict
-				if not preparerMatch(ewayClient, lacerteClient):
-					nonmatching_preparers[lacerteClient.account_name] = [ewayClient.preparer, lacerteClient.preparer]
+				if not preparer_match(eway_client, lacerte_client):
+					nonmatching_preparers[lacerte_client.account_name] = [eway_client.preparer, lacerte_client.preparer]
 				# if the statuses don't correspond, add to dict
-				if not statusMatch(ewayClient, lacerteClient):
-					nonmatching_statuses[lacerteClient.account_name] = [ewayClient.status, lacerteClient.status, lacerteClient.preparer]
-				if not emailMatch(ewayClient, lacerteClient):
-					nonmatching_email[lacerteClient.account_name] = [
-						ewayClient.taxpayerEmail,
-						lacerteClient.taxpayerEmail,
-						ewayClient.spouseEmail,
-						lacerteClient.spouseEmail,
-						lacerteClient.preparer
+				if not statusMatch(eway_client, lacerte_client):
+					nonmatching_statuses[lacerte_client.account_name] = [eway_client.status, lacerte_client.status, lacerte_client.preparer]
+				if not emailMatch(eway_client, lacerte_client):
+					nonmatching_emails[lacerte_client.account_name] = [
+						eway_client.taxpayerEmail,
+						lacerte_client.taxpayerEmail,
+						eway_client.spouseEmail,
+						lacerte_client.spouseEmail,
+						lacerte_client.preparer
 					]
 			# if there isn't a name match, leave in clients_not_in_eway dict and move on
 			else:
 				continue
 
-	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses
+	return clients_not_in_eway, nonmatching_addrs, nonmatching_preparers, nonmatching_statuses, nonmatching_emails
 
 
 # data

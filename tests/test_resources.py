@@ -26,7 +26,7 @@ class TestResources(unittest.TestCase):
       'Zip': MFJ_zipcode
     }
 
-    created_client = logic.createClient(row)
+    created_client = logic.create_client(row)
 
     self.assertEqual(mock_client.last_name, created_client.last_name)
     self.assertEqual(mock_client.first_names, created_client.first_names)
@@ -61,13 +61,13 @@ class TestResources(unittest.TestCase):
       "Gonzalez, Dania and Dani", MFJ_e_preparer, MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
 
-    self.assertTrue(logic.nameMatch(mock_client, name_formatting_client))
+    self.assertTrue(logic.name_match(mock_client, name_formatting_client))
 
-    self.assertFalse(logic.nameMatch(mock_client, non_matching_S_client))
-    self.assertFalse(logic.nameMatch(non_matching_S_client, non_matching_S2_client))
-    self.assertFalse(logic.nameMatch(mock_client, nearmatch_s_client))
-    self.assertFalse(logic.nameMatch(mock_client, nearmatch_married_client))
-    self.assertFalse(logic.nameMatch(mock_client, name_nonmatching_client))
+    self.assertFalse(logic.name_match(mock_client, non_matching_S_client))
+    self.assertFalse(logic.name_match(non_matching_S_client, non_matching_S2_client))
+    self.assertFalse(logic.name_match(mock_client, nearmatch_s_client))
+    self.assertFalse(logic.name_match(mock_client, nearmatch_married_client))
+    self.assertFalse(logic.name_match(mock_client, name_nonmatching_client))
 
   def test_addrMatch(self):
 
@@ -78,9 +78,9 @@ class TestResources(unittest.TestCase):
       MFJ_name, MFJ_e_preparer, MFJ_status_str, '42 Wallaby Way', 'Sydney', 'AU', '87198'
     )
     
-    self.assertTrue(logic.addrMatch(mock_client, matching_addr_client))
+    self.assertTrue(logic.addr_match(mock_client, matching_addr_client))
 
-    self.assertFalse(logic.addrMatch(mock_client, nonmatching_addr_client))
+    self.assertFalse(logic.addr_match(mock_client, nonmatching_addr_client))
 
   def test_preparerMatch(self):
 
@@ -91,9 +91,9 @@ class TestResources(unittest.TestCase):
       MFJ_name, 'Kathy McGinnis', MFJ_status_str, MFJ_street, MFJ_city, MFJ_state, MFJ_zipcode
     )
 
-    self.assertTrue(logic.preparerMatch(mock_client, matching_preparer_client))
+    self.assertTrue(logic.preparer_match(mock_client, matching_preparer_client))
 
-    self.assertFalse(logic.preparerMatch(mock_client, nonmatching_preparer_client))
+    self.assertFalse(logic.preparer_match(mock_client, nonmatching_preparer_client))
 
   def test_statusMatch(self):
 
@@ -224,15 +224,15 @@ class TestResources(unittest.TestCase):
       client1_married, client2_wrong_preparer, client3_wrong_addr, client4_wrong_eway_status
     ]
 
-    happy_clients, happy_addrs, happy_preparers, happy_statuses = logic.matchClients(
+    happy_clients, happy_addrs, happy_preparers, happy_statuses = logic.match_clients(
       eway_clients_happy_path, lacerte_clients
     )
 
-    missing_clients, missing_addrs, missing_preparers, missing_statuses = logic.matchClients(
+    missing_clients, missing_addrs, missing_preparers, missing_statuses = logic.match_clients(
       eway_clients_missing_client, lacerte_clients
     )
 
-    mismatched_clients, mismatched_addrs, mismatched_preparers, mismatched_statuses = logic.matchClients(
+    mismatched_clients, mismatched_addrs, mismatched_preparers, mismatched_statuses = logic.match_clients(
       eway_clients_mismatched_data, lacerte_clients
     )
 
@@ -258,4 +258,3 @@ class TestResources(unittest.TestCase):
     self.assertTrue(mismatched_preparers['Washington, George'])
     self.assertTrue(len(mismatched_statuses.keys()) == 1)
     self.assertTrue(mismatched_statuses['Adams, John'])
-
